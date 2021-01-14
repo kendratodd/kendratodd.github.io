@@ -13,6 +13,7 @@ jobs:
       - run: |
           npm i -g relaxedjs
           relaxedjs kendra-todd-resume.pug --build-once
+          mv kendra-todd-resume.pdf resume.pdf
       - uses: actions/upload-artifact@v2
         with:
           name: Resume
