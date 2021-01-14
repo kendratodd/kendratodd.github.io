@@ -1,0 +1,19 @@
+name: Generate PDF
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  generate-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: |
+          npm i -g relaxedjs
+          relaxedjs kendra-todd-resume.pug --build-once
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Resume
+          path: resume.pdf
