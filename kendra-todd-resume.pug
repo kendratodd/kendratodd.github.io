@@ -10,17 +10,23 @@ include resume-mixins.pug
 
         +item("Quality Assurance Analyst II", "Simple Finance", "Remote", "2021", "2017")
             :markdown-it
-                - Designed end-to-end test plans and manually executed exploratory, functional, and acceptance testing
-                for large-scale initiatives, including:
-                    - New product launches
-                    - Customer service tooling implementations
-                    - Third party integrations
-                - Contributed to and maintainedd Simple’s test case repository in Testrail and Xray
+                - While embedded within a cross-functional product team, advocated for a “shift left” mentality to deliver
+                high quality features on Android, iOS, Web, and Salesforce platforms
+                - From April 2020, became the primary contributor to Simple’s Cypress test harness, written in JavaScript
+                and TypeScript; increased new coverage by more than 25 percent
+                - Maintained and contributed new test cases to Simple’s test case repository in Testrail and Xray
                 - Mentored QA interns and analysts in software QA methodologies and strategies
-                - Became the primary contributor to Simple’s Cypress test harness; increased new coverage by more than
-                25 percent.
-                - Worked with developers and stakeholders to provide testing insight, raise risks, and offer product
-                knowledge and design input early in the software development cycle
+                - Designed end-to-end test plans and executed exploratory, functional, regression, and
+                acceptance testing for numerous large-scale initiatives, including:
+                    - Simple Personal Loans: \
+                       &ndash; Contributed 60 percent of automated web coverage in Cypress \
+                       &ndash; Quality delivery of the product led to sucessful launch, exceeding $8MM booked loans within
+                       1 year
+                    - Salesforce CRM Implementation: \
+                       &ndash; Co-facilitated ongoing User Acceptance Testing sessions with 20+ agents, triaged and
+                       escalated defects based on severity  \
+                       &ndash; Led manual test efforts for accompanying telephony implementation with Tenfold, and
+                       migration from Tenfold to Five9
 
         +item("Customer Relations Escalation Agent", "Simple Finance", "Portland, OR", "2017", "2016")
             :markdown-it
@@ -32,7 +38,7 @@ include resume-mixins.pug
                 - Assisted in the escalation of critical service interruptions and posted to a customer-facing status
                 page via GitHub
 
-        +item("Customer Support Agent", "Simple Finance", "Portland, OR", "2016", "2015")
+        +item("Customer Relations Agent", "Simple Finance", "Portland, OR", "2016", "2015")
             :markdown-it
                 - Responded to inbound customer contact; assisted customers with product navigation and troubleshooting
                 on mobile and web platforms, general account maintenance, and in-depth support for payment and funding
@@ -52,23 +58,6 @@ include resume-mixins.pug
         //        - Acted as a point of contact for a team of representatives; executed side-by-side coaching and provided
         //        real-time feedback to encourage metric-related performance.
 
-    .main-block
-        h2 #[i.fa.fa-folder-open] Selected Projects
-
-        +item("Simple Personal Loans", "Simple Finance", null, "2020")
-            :markdown-it
-                - Led and organized all manual testing efforts across Android, iOS, and Web clients
-                - Contributed 60 percent of automated web coverage for the feature in Cypress
-                - Quality delivery of the product led to sucessful launch, exceeding $8MM booked loans within 1 year
-
-        +item("Salesforce CRM Implementation", "Simple Finance", null, "2017", "2018")
-            :markdown-it
-                - As primary QA, led functional and regression testing efforts for migration from internally built
-                customer relationship management tool to Salesforce platform
-                - Co-facilitated ongoing User Acceptance Testing sessions with 20+ agents, triaged and reported defects
-                - Manually tested initial telephony implementation with Tenfold, and later, migration from Tenfold to Five9
-
-
     .main-block.concise
         h2 #[i.fa.fa-graduation-cap] Education
 
@@ -81,9 +70,9 @@ include resume-mixins.pug
         h1 Contact Info
         ul
             li #[i.fa.fa-globe]  Denver, Colorado
+            li #[i.fa.fa-phone] 720.468.3934
             li #[i.fa.fa-linkedin] <a href="https://www.linkedin.com/in/kendractodd/">/in/kendractodd</a>
             li #[i.fa.fa-envelope] <a href="mailto:kendratodd@gmail.com">kendratodd@gmail.com</a>
-            li #[i.fa.fa-phone] <a href="tel:+1-720-468-3934">720.468.3934</a>
 
     #skills.side-block
         h3 Languages I've Shipped Code In
@@ -99,13 +88,14 @@ include resume-mixins.pug
             li GitHub
             li Jira
             li Postman
+            li Salesforce
             li Testrail
             li Xcode
             li Xray
 
     //- This points to mnjul's original resume project
     #disclaimer.side-block.
-        This resume was wholly typeset with HTML/CSS — see code git.io/vVSYL
+        Resume Template from <a href="https://github.com/mnjul/html-resume">mnjul</a>
 
 style
     include:scss resume.scss
