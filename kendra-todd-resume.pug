@@ -3,10 +3,19 @@ include resume-mixins.pug
 #main
     #title
         h1 Kendra Todd
-        .subtitle Software Quality Assurance Analyst
+        .subtitle Software Quality Assurance Engineer
 
     .main-block
         h2 #[i.fa.fa-suitcase] Experience
+
+        +item("Quality Assurance Engineer", "Bitwarden", "Remote", "2021", "Present")
+            :markdown-it
+                - Executed thorough acceptance and regression testing against Bitwarden's expansive personal and enterprise client
+                software, including web, mobile, and desktop applications, browser extensions, command line tools, and directory connector software
+                - Generated new test cases and maintained Bitwarden's test case repository in Testrail
+                - Organized and facilitated cross-team user-acceptance testing for major feature releases
+                - Contributed to Bitwarden's automated Selenium test harness, written in C#, with both new test coverage and test maintenance
+
 
         +item("Quality Assurance Analyst II", "Simple Finance", "Remote", "2021", "2017")
             :markdown-it
@@ -69,7 +78,7 @@ include resume-mixins.pug
     #contact.side-block
         h1 Contact Info
         ul
-            li #[i.fa.fa-globe]  Denver, Colorado
+            li #[i.fa.fa-globe] Denver, Colorado
             li #[i.fa.fa-phone] 720.468.3934
             li #[i.fa.fa-linkedin] <a href="https://www.linkedin.com/in/kendractodd/">/in/kendractodd</a>
             li #[i.fa.fa-envelope] <a href="mailto:kendratodd@gmail.com">kendratodd@gmail.com</a>
@@ -77,13 +86,17 @@ include resume-mixins.pug
     #skills.side-block
         h3 Languages I've Shipped Code In
         ul
+            li C#
             li JavaScript
             li TypeScript
             li Python
 
         h3 Frameworks & Tools I've Used
         ul
+            li Azure Data Studio
             li Android Studio
+            li Asana
+            li Burp Suite
             li Cypress
             li GitHub
             li Jira
@@ -92,6 +105,7 @@ include resume-mixins.pug
             li Testrail
             li Xcode
             li Xray
+            li Visual Studio
 
     //- This points to mnjul's original resume project
     #disclaimer.side-block.
