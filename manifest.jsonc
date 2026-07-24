@@ -1,0 +1,730 @@
+{
+  "schemaVersion": "1.0.0",
+  "hosts": {
+    "account.rogers.com": {
+      "forms": [
+        // The login form is rendered into two sequential Angular component hosts
+        // at the same URL:
+        // - state 1 (username) is wrapped by <ng-component>; the inner
+        //   <form> has no id. The Continue button advances to state 2.
+        // - state 2 (password) is wrapped by <password-form>; the inner
+        //   <form> gains id="LoginForm".
+        {
+          "category": "account-login",
+          "container": [
+            "ng-component form[method='POST']:has(input[autocomplete='username'])",
+            // Form gains an id and contextually-relevant container after passing username pre-validation
+            "password-form form[method='POST']#LoginForm"
+          ],
+          "fields": {
+            "email": [
+              "ng-component form[method='POST'] input[type='email'][autocomplete='username'][title='Enter your registered username here']"
+            ],
+            "password": [
+              "password-form form[method='POST']#LoginForm input[type='password'][autocomplete='current-password'][aria-label='Password']"
+            ]
+          },
+          "actions": {
+            // "Continue" from username check step to password entry
+            "next": [
+              "ng-component form[method='POST']:has(input[autocomplete='username']) button[role='button'][type='submit']"
+            ],
+            // "Sign in" submit with password entry
+            "submit": [
+              "password-form form[method='POST']#LoginForm button[role='button'][type='submit']"
+            ]
+          }
+        }
+      ]
+    },
+    "auth.hbomax.com": {
+      "pathnames": {
+        "/login": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": [
+                "gi-login.hydrated >>> gi-sign-in-combo.hydrated >>> gi-form.hydrated form.form"
+              ],
+              "fields": {
+                // Shared input; email mode (mutually exclusive with `phone`).
+                "email": [
+                  "gi-login.hydrated >>> gi-sign-in-combo.hydrated >>> gi-form.hydrated form.form input#sign-in-phoneEmail-input[type='email'][autocomplete='email'][name='phoneEmail']"
+                ],
+                "phoneCountryCode": [
+                  // Only appears after qualified input value entry (see: "phone")
+                  "gi-login.hydrated >>> gi-sign-in-combo.hydrated >>> gi-form.hydrated form.form gi-phone-country-select select[autocomplete='tel-country-code']"
+                ],
+                "phone": [
+                  "gi-login.hydrated >>> gi-sign-in-combo.hydrated >>> gi-form.hydrated form.form input#sign-in-phoneEmail-input[type='email'][autocomplete='email'][name='phoneEmail']",
+                  // Same DOM element as `email`; the type and autocomplete attributes
+                  // swap when phone content is detected; the first selectors here
+                  // represents the unpopulated state
+                  "gi-login.hydrated >>> gi-sign-in-combo.hydrated >>> gi-form.hydrated form.form input#sign-in-phoneEmail-input[type='tel'][autocomplete='tel-national'][name='phoneEmail']"
+                ],
+                // The `hide-input-group` class is included on an intermediate `div`
+                // parent of a non-interactable password field on the first step of
+                // the form.
+                "password": [
+                  "gi-login.hydrated >>> gi-sign-in-password.hydrated >>> gi-form.hydrated form.sign-in-password:not(:has(div.hide-input-group)) input#sign-in-password-password-input[type='password'][autocomplete='new-password'][name='password']"
+                ]
+              },
+              "actions": {
+                // "Continue" advances step-1 -> step-2; same DOM element as `submit`.
+                "next": [
+                  "gi-login.hydrated >>> gi-sign-in-combo.hydrated >>> gi-form.hydrated form.form button[type='submit'][data-testid='gisdk.gi-sign-in.continue_button']"
+                ],
+                // "Sign In" submits credentials on step-2; same DOM element as `next`.
+                "submit": [
+                  "gi-login.hydrated >>> gi-sign-in-combo.hydrated >>> gi-form.hydrated form.form button[type='submit'][data-testid='gisdk.gi-sign-in.continue_button']"
+                ],
+                // Field-level clear button; only present when the email/phone input has a value.
+                "reset": [
+                  "gi-login.hydrated >>> gi-sign-in-combo.hydrated >>> gi-form.hydrated form.form button#clear-sign-in-phoneEmail-input[type='button'][data-testid='form-input-clear-button']"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "bankofamerica.com": {
+      "forms": [
+        {
+          "category": "account-login",
+          "container": ["div#signin-form"],
+          "fields": {
+            "username": ["input#oid"],
+            "password": ["input#pass"]
+          },
+          "actions": {
+            "submit": ["button#secure-signin-submit"]
+          }
+        }
+      ]
+    },
+    "identity.enterprise.spendclarity.visa.com": {
+      "pathnames": {
+        "/login": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": ["form[name='login'][data-testid='login-form']"],
+              "fields": {
+                "password": [
+                  // `id` value is reused in child input on the page
+                  "dse-input#password >>> input#password[type='password']"
+                ],
+                "username": [
+                  // `id` value is reused in child input on the page
+                  "dse-input#username >>> input#username[type='text']"
+                ]
+              },
+              "actions": {
+                "submit": [
+                  "dse-button#submit-button >>> button[data-testid='submit-button']"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "login.coinbase.com": {
+      "forms": [
+        {
+          "category": "account-login",
+          // Note; the `form` tag has no targetable attributes
+          "container": ["div#two-factor form"],
+          "fields": {
+            "email": ["div#two-factor form input[name='email-input']"],
+            "password": ["div#two-factor form input#current-password"]
+          },
+          "actions": {
+            "next": ["div#two-factor form button[name='email-submit-button']"],
+            "submit": [
+              "div#two-factor form button[name='password-submit-button']"
+            ]
+          }
+        }
+      ]
+    },
+    "datacamp.com": {
+      "pathnames": {
+        "/": {
+          "forms": [
+            {
+              "category": "account-creation",
+              "container": ["form[action='/users'][data-testid='form-signup']"],
+              "fields": {
+                "username": ["input#intro-user_email"],
+                "newPassword": ["input#intro-user_password"]
+              },
+              "actions": {
+                "submit": [
+                  "button[data-trackid='form-signup-cta'][type='submit']"
+                ]
+              }
+            }
+          ]
+        },
+        "/users/sign_up": {
+          "forms": [
+            {
+              "category": "account-creation",
+              "container": ["form#user_register_form"],
+              "fields": {
+                "username": ["input#user_email"],
+                "newPassword": ["input#user_password"]
+              },
+              "actions": {
+                "submit": ["input#user_submit"]
+              }
+            }
+          ]
+        },
+        "/tracks/career": {
+          "forms": [
+            {
+              "category": "account-creation",
+              "container": ["form[action='/users'][data-testid='form-signup']"],
+              "fields": {
+                "username": ["input#-user_email"],
+                "newPassword": ["input#-user_password"]
+              },
+              "actions": {
+                "submit": [
+                  "button[data-trackid='form-signup-cta'][type='submit']"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "factorio.com": {
+      "pathnames": {
+        "/login": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": ["div.panel.small-center form[action='/login']"],
+              "fields": {
+                "username": ["input#username_or_email"],
+                "password": ["input#password"]
+              },
+              "actions": {
+                "submit": [
+                  "div.panel.small-center form[action='/login'] button[type='submit']"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "firstfedcu.com": {
+      "forms": [
+        {
+          "category": "account-login",
+          "container": [
+            "div.online-banking-form iframe#tethered_frame >>> form#tethered-login"
+          ],
+          "fields": {
+            "username": [
+              "div.online-banking-form iframe#tethered_frame >>> form#tethered-login input#username"
+            ],
+            "password": [
+              "div.online-banking-form iframe#tethered_frame >>> form#tethered-login input#credential"
+            ]
+          },
+          "actions": {
+            "submit": [
+              "div.online-banking-form iframe#tethered_frame >>> form#tethered-login button#submit[type='submit']"
+            ]
+          }
+        }
+      ]
+    },
+    "ecams.geico.com": {
+      "forms": [
+        {
+          "category": "account-login",
+          // Rendered by Flutter Web. Notes:
+          // - The submit action is a `<flt-semantics role="button">`, not a native button.
+          // - The numeric `flt-semantic-node-N` ids are render-order-based and unstable.
+          // - The password input's `id` is only `current-password` after the field has focus;
+          //   before focus, there's a decoy input with `autocomplete="off"`. The
+          //   form anchor uses only the persistent email input for that reason.
+          "container": ["form[id^='flt-semantic-node-']:has(input#email)"],
+          "fields": {
+            "username": ["form[id^='flt-semantic-node-'] input#email"],
+            "password": [
+              "form[id^='flt-semantic-node-'] input#current-password"
+            ]
+          },
+          "actions": {
+            "submit": [
+              "form[id^='flt-semantic-node-']:has(input#email) flt-semantics[role='button'][flt-semantics-identifier='null_Button_Default_Title']"
+            ]
+          }
+        }
+      ]
+    },
+    "patreon.com": {
+      "pathnames": {
+        "/login": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": ["main#main-content form"],
+              "fields": {
+                "username": [
+                  "main#main-content form span[class^='EmailPasswordScreen'] ~ div input[autocomplete='email'][name='email']"
+                ],
+                "password": [
+                  "main#main-content form input[autocomplete='current-password'][name='current-password']"
+                ]
+              },
+              "actions": {
+                "submit": ["main#main-content form button[type='submit']"]
+              }
+            }
+          ]
+        },
+        "/settings/account": {
+          "forms": [
+            {
+              "category": "account-update",
+              "container": ["div[class^='ChangePassword'] form"],
+              "fields": {
+                "password": [
+                  "div[class^='ChangePassword'] form input[type='password'][name='oldPassword']"
+                ],
+                "newPassword": [
+                  "div[class^='ChangePassword'] form input[type='password'][name='newPassword']",
+                  "div[class^='ChangePassword'] form input[type='password'][name='confirmPassword']"
+                ]
+              },
+              "actions": {
+                "submit": [
+                  "div[class^='ChangePassword'] form div[class$='submitButtonWrapper'] button[type='submit']"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "rowleycompany.com": {
+      "pathnames": {
+        "/checkout/cart": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": ["aside.loginpopup form.form-login"],
+              "fields": {
+                "username": ["input#login-email"],
+                "password": ["aside.loginpopup input[name='login[password]']"]
+              },
+              "actions": {
+                "submit": [
+                  "aside.loginpopup form.form-login button[type='submit']"
+                ]
+              }
+            },
+            {
+              "category": "account-creation",
+              "container": ["form#create-form"],
+              "fields": {
+                "firstName": ["input[name='firstname']"],
+                "lastName": ["input[name='lastname']"],
+                "username": ["form#create-form input[name='email']"],
+                "newPassword": [
+                  "input#create-password",
+                  "input#create-password-confirmation"
+                ]
+              },
+              "actions": {
+                "submit": ["#create-form button[type='submit']"]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "store.steampowered.com": {
+      "forms": [
+        {
+          "category": "search",
+          "container": ["div[role='navigation'] form[role='search']"],
+          "fields": {
+            // This field has `autocomplete="off"`
+            "searchTerm": [
+              "div[role='navigation'] form[role='search'] input[name='term']"
+            ]
+          },
+          "actions": {
+            "submit": [
+              "div[role='navigation'] form[role='search'] button[type='submit']"
+            ]
+          }
+        }
+      ],
+      "pathnames": {
+        "/login": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": [
+                "div[data-featuretarget='login'] form[class]:has(input[type='password'])"
+              ],
+              "fields": {
+                "username": [
+                  "div[data-featuretarget='login'] form[class]:has(input[type='password']) input[type='text']"
+                ],
+                "password": [
+                  "div[data-featuretarget='login'] form[class] input[type='password']"
+                ],
+                // "Remember me" checkbox
+                "consentUser": [
+                  "div[data-featuretarget='login'] form[class] div[role='checkbox']"
+                ]
+              },
+              "actions": {
+                "submit": [
+                  "div[data-featuretarget='login'] form[class]:has(input[type='password']) button[type='submit']"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "tiktok.com": {
+      "forms": [
+        {
+          "category": "account-login",
+          // the form is a bare element; it has no attributes
+          "container": ["div#loginContainer form"],
+          "fields": {
+            "email": [
+              "div#loginContainer form input[autocomplete='webauthn'][name='username']"
+            ],
+            "password": [
+              "div#loginContainer form input[autocomplete='new-password']"
+            ],
+            "phone": [
+              "div#loginContainer form input[autocomplete='username'][name='mobile']"
+            ],
+            "username": [
+              "div#loginContainer form input[autocomplete='webauthn'][name='username']"
+            ]
+          },
+          "actions": {
+            // The button does not have an id; `data-e2e` may have broke containment
+            "submit": ["div#loginContainer form button[type='submit']"]
+          }
+        },
+        {
+          "category": "account-creation",
+          // the form is a bare element; it has no attributes
+          "container": ["div#loginContainer form"],
+          "fields": {
+            // birthday fields are represented as a div; doesn't appear to have a backing field
+            // country code represented as a div; doesn't appear to have a backing field
+            "phone": ["div#loginContainer form input[name='mobile']"]
+          },
+          "actions": {
+            "next": ["div#loginContainer form button[type='submit']"]
+          }
+        },
+        {
+          "category": "account-creation",
+          // birthday fields are represented as a div; doesn't appear to have a backing field
+          // the form is a bare element; it has no attributes
+          "container": ["div#loginContainer form"],
+          "fields": {
+            "email": ["div#loginContainer form input[name='email']"],
+            // field only distinguishable from `account-login` because the email field is present instead of `username`
+            "newPassword": [
+              "div#loginContainer form:has(input[name='email']) input[type='password']"
+            ],
+            "username": ["div#loginContainer form input[name='username']"]
+          },
+          "actions": {
+            // The button does not have an id; `data-e2e` may have broke containment
+            "next": ["div#loginContainer form button[type='submit']"]
+          }
+        }
+      ]
+    },
+    "trip.com": {
+      "forms": [
+        // This site uses the same form for account creation and login, with differing flow options based on pre-qualifying the email.
+        {
+          "category": "account-creation",
+          // Note, the static class value segment matched elsewhere is not present in every state
+          "container": ["div#ibu_login_online form[class]"],
+          "fields": {
+            "newPassword": [
+              "div#ibu_login_online form[class]:has(div[class*='register-content-wrapper']) input[autocomplete='new-password']"
+            ],
+            // Note, the form at this stage lacks any static class value
+            "username": [
+              "div#ibu_login_online form[class] input[placeholder='Please enter an email address']"
+            ]
+          },
+          "actions": {
+            // "Register and Sign in"
+            "submit": [
+              "div#ibu_login_online form[class]:has(div[class*='register-content-wrapper']) button[type='submit']"
+            ],
+            // This action is not enclosed by the form container
+            "previous": ["div#ibu_login_online div#ibu_login_back"],
+            // This action is not enclosed by the form container
+            "cancel": ["div#ibu_login_online div#ibu_login_close"],
+            "reset": [
+              // Field reset; form class to match against each form state
+              "div#ibu_login_online form[class]:has(div[class*='register-content-wrapper']) div#ibu-password-group div#ibu_login_input_clear"
+            ]
+          }
+        },
+        {
+          "category": "account-login",
+          // Note, the static class value segment matched elsewhere is not present in every state
+          "container": ["div#ibu_login_online form[class]"],
+          "fields": {
+            // signposted as a new password field, but is used for existing password
+            "password": [
+              "div#ibu_login_online form[class]:has(div[class*='content-account-wrapper']) input[autocomplete='new-password']"
+            ],
+            // MFA
+            "oneTimeCode": [
+              "div#ibu_login_online form[class]:has(div[class*='content-account-wrapper']) input[autocomplete='one-time-code']"
+            ],
+            // Note, the form at this stage lacks any static class value
+            "username": [
+              "div#ibu_login_online form[class] input[placeholder='Please enter an email address']"
+            ]
+          },
+          "actions": {
+            // "Sign in"
+            "submit": [
+              "div#ibu_login_online form[class]:has(div[class*='content-account-wrapper']) button[type='submit']"
+            ],
+            // This action is not enclosed by the form container
+            "previous": ["div#ibu_login_online div#ibu_login_back"],
+            // This action is not enclosed by the form container
+            "cancel": ["div#ibu_login_online div#ibu_login_close"],
+            "reset": [
+              // Field reset; form class to match against each form state
+              "div#ibu_login_online form[class]:has(div[class*='content-account-wrapper']) div#ibu_login_input_clear"
+            ]
+          }
+        }
+      ]
+    },
+    // `us.` subdomain proxies the base hostname; described forms are equivalent to www.trip.com
+    "us.trip.com": {
+      "forms": [
+        {
+          "category": "account-creation",
+          "container": ["div#ibu_login_online form[class]"],
+          "fields": {
+            "newPassword": [
+              "div#ibu_login_online form[class]:has(div[class*='register-content-wrapper']) input[autocomplete='new-password']"
+            ],
+            "username": [
+              "div#ibu_login_online form[class] input[placeholder='Please enter an email address']"
+            ]
+          },
+          "actions": {
+            "submit": [
+              "div#ibu_login_online form[class]:has(div[class*='register-content-wrapper']) button[type='submit']"
+            ],
+            "previous": ["div#ibu_login_online div#ibu_login_back"],
+            "cancel": ["div#ibu_login_online div#ibu_login_close"],
+            "reset": [
+              "div#ibu_login_online form[class]:has(div[class*='register-content-wrapper']) div#ibu-password-group div#ibu_login_input_clear"
+            ]
+          }
+        },
+        {
+          "category": "account-login",
+          "container": ["div#ibu_login_online form[class]"],
+          "fields": {
+            "password": [
+              "div#ibu_login_online form[class]:has(div[class*='content-account-wrapper']) input[autocomplete='new-password']"
+            ],
+            "oneTimeCode": [
+              "div#ibu_login_online form[class]:has(div[class*='content-account-wrapper']) input[autocomplete='one-time-code']"
+            ],
+            "username": [
+              "div#ibu_login_online form[class] input[placeholder='Please enter an email address']"
+            ]
+          },
+          "actions": {
+            "submit": [
+              "div#ibu_login_online form[class]:has(div[class*='content-account-wrapper']) button[type='submit']"
+            ],
+            "previous": ["div#ibu_login_online div#ibu_login_back"],
+            "cancel": ["div#ibu_login_online div#ibu_login_close"],
+            "reset": [
+              "div#ibu_login_online form[class]:has(div[class*='content-account-wrapper']) div#ibu_login_input_clear"
+            ]
+          }
+        }
+      ]
+    },
+    "webtests.dev": {
+      "pathnames": {
+        "/forms/login/ambiguous-inputs": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": ["div.ambiguous-inputs-container"],
+              "fields": {
+                // The input type for password here is "text"
+                "password": ["input[name='p']"],
+                "username": ["input[name='u']"]
+              },
+              "actions": {
+                "submit": [
+                  "div.ambiguous-inputs-container button#ambiguous-inputs-go"
+                ]
+              }
+            }
+          ]
+        },
+        "/forms/login/iframe-login": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": ["iframe#test-iframe >>> form[action='/login']"],
+              "fields": {
+                "username": [
+                  "iframe#test-iframe >>> form[action='/login'] input#username"
+                ],
+                "password": [
+                  "iframe#test-iframe >>> form[action='/login'] input#password"
+                ]
+              },
+              "actions": {
+                "submit": [
+                  "iframe#test-iframe >>> form[action='/login'] button[type='submit']"
+                ]
+              }
+            }
+          ]
+        },
+        "/forms/login/iframe-sandboxed-login": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": [
+                "iframe#test-iframe[sandbox] >>> form[action='/login']"
+              ],
+              "fields": {
+                "username": [
+                  "iframe#test-iframe[sandbox] >>> form[action='/login'] input#username"
+                ],
+                "password": [
+                  "iframe#test-iframe[sandbox] >>> form[action='/login'] input#password"
+                ]
+              },
+              "actions": {
+                "submit": [
+                  "iframe#test-iframe[sandbox] >>> form[action='/login'] button[type='submit']"
+                ]
+              }
+            }
+          ]
+        },
+        // Page is marked as irrelevant as a diagnostic case. The page purpose is to exemplify strong form semantics.
+        "/forms/login/simple-spec": null,
+        "/forms/login/shadow-root-inputs-closed": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": ["div#form-container >>> form[action='/login']"],
+              "fields": {
+                "username": [
+                  "div#form-container >>> form[action='/login'] > div:nth-of-type(1) > div >>> input[name='username']"
+                ],
+                "password": [
+                  "div#form-container >>> form[action='/login'] > div:nth-of-type(2) > div >>> input[name='password']"
+                ]
+              },
+              "actions": {
+                "submit": [
+                  "div#form-container >>> form[action='/login'] button[type='submit']"
+                ]
+              }
+            }
+          ]
+        },
+        "/forms/login/security-code-multi-input": {
+          "forms": [
+            {
+              "category": "account-login",
+              "container": ["form[action='/login']"],
+              "fields": {
+                "oneTimeCode": [
+                  [
+                    "input[name='otp-code-0']",
+                    "input[name='otp-code-1']",
+                    "input[name='otp-code-2']",
+                    "input[name='otp-code-3']",
+                    "input[name='otp-code-4']",
+                    "input[name='otp-code-5']"
+                  ]
+                ]
+              },
+              "actions": {
+                "submit": ["form[action='/login'] button[type='submit']"]
+              }
+            }
+          ]
+        },
+	"/forms/payment/credit-card": {
+          "forms": [
+            {
+              "category": "payment-card",
+              "fields": {
+                "cardholderName": ["input#card-name"],
+                "cardNumber":     ["input#card-number"],
+                "cardExpirationDate": ["input#card-expiration"],
+                "cardCvv":        ["input#card-cvv"]
+              }
+            }
+          ]
+        },
+        "/forms/create/create-account-extended-spec": {
+          "forms": [
+            {
+              "category": "account-creation",
+              "container": ["form[action='/account']"],
+              "fields": {
+                "email": ["input#email"],
+                "newPassword": ["input#password"],
+                "fullName": ["input#full-name"],
+                "organization": ["input#company-name"],
+                "phone": ["input#phone-number"],
+                "addressLine1": ["input#address"],
+                "addressLine2": ["input#address-ext"],
+                "addressLevel2": ["input#city"],
+                "addressLevel1": ["input#state"],
+                "country": ["input#country"],
+                "postalCode": ["input#postcode"]
+              },
+              "actions": {
+                "submit": ["button[type='submit']"]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
