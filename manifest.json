@@ -1,0 +1,11 @@
+{
+  "buildId": "test-1",
+  "maps": {
+    "forms": {
+      "v1": {
+        "filename": "forms.v1.json",
+        "cid": "test-001"
+      }
+    }
+  }
+}
