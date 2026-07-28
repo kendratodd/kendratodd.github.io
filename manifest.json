@@ -6,7 +6,7 @@
     "forms": {
       "v1": {
         "filename": "forms.v1.json",
-        "cid": "test-005",
+        "cid": "test-006",
         "schema": "forms.v1.schema.json"
       }
     }
