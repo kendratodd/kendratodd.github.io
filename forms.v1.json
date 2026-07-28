@@ -646,10 +646,10 @@
               ],
               "fields": {
                 "password": [
-                  "input[name='p']"
+                  "input"
                 ],
                 "username": [
-                  "input[name='u']"
+                  "input"
                 ]
               },
               "actions": {
