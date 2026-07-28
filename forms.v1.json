@@ -646,10 +646,10 @@
               ],
               "fields": {
                 "password": [
-                  "input"
+                  "input[name='p']"
                 ],
                 "username": [
-                  "input"
+                  "input[name='u']"
                 ]
               },
               "actions": {
@@ -757,27 +757,6 @@
             }
           ]
         },
-        "/forms/payment/credit-card": {
-          "forms": [
-            {
-              "category": "payment-card",
-              "fields": {
-                "cardholderName": [
-                  "input#card-name"
-                ],
-                "cardNumber": [
-                  "input#card-number"
-                ],
-                "cardExpirationDate": [
-                  "input#card-expiration"
-                ],
-                "cardCvv": [
-                  "input#card-cvv"
-                ]
-              }
-            }
-          ]
-        },
         "/forms/create/create-account-extended-spec": {
           "forms": [
             {
@@ -823,6 +802,27 @@
               "actions": {
                 "submit": [
                   "button[type='submit']"
+                ]
+              }
+            }
+          ]
+        },
+        "/forms/payment/credit-card": {
+          "forms": [
+            {
+              "category": "payment-card",
+              "fields": {
+                "cardholderName": [
+                  "input#card-name"
+                ],
+                "cardNumber": [
+                  "input#card-number"
+                ],
+                "cardExpirationDate": [
+                  "input#card-expiration"
+                ],
+                "cardCvv": [
+                  "input#card-cvv"
                 ]
               }
             }
