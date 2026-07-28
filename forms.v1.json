@@ -827,46 +827,43 @@
               }
             }
           ]
-        },
-          "schemaVersion": "1.0.0",
-          "hosts": {
-            "kendratodd.github.io": {
-              "forms": [
-                {
-                  "category": "account-login",
-                  "container": null,
-                  "fields": {
-                    "username": [
-                      "input#login-username"
-                    ],
-                    "password": [
-                      "input#login-password"
-                    ]
-                  }
-                },
-                {
-                  "category": "payment-card",
-                  "container": null,
-                  "fields": {
-                    "cardNumber": [
-                      "input#cc-number"
-                    ],
-                    "cardholderName": [
-                      "input#cc-name"
-                    ],
-                    "cardExpirationDate": [
-                      "input#cc-exp"
-                    ],
-                    "cardCvv": [
-                      "input#cc-csc"
-                    ]
-                  }
-                }
-              ],
-              "pathnames": null
-            }
-          }
         }
       }
+    },
+    "kendratodd.github.io": {
+      "forms": [
+        {
+          "category": "account-login",
+          "container": null,
+          "fields": {
+            "username": [
+              "input#login-username"
+            ],
+            "password": [
+              "input#login-password"
+            ]
+          }
+        },
+        {
+          "category": "payment-card",
+          "container": null,
+          "fields": {
+            "cardNumber": [
+              "input#cc-number"
+            ],
+            "cardholderName": [
+              "input#cc-name"
+            ],
+            "cardExpirationDate": [
+              "input#cc-exp"
+            ],
+            "cardCvv": [
+              "input#cc-csc"
+            ]
+          }
+        }
+      ],
+      "pathnames": null
     }
   }
+}
