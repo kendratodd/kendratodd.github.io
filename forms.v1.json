@@ -837,10 +837,10 @@
           "container": null,
           "fields": {
             "username": [
-              "input#login-username"
+              "null"
             ],
             "password": [
-              "input#login-password"
+              "null"
             ]
           }
         },
