@@ -830,6 +830,37 @@
         }
       }
     },
+    "amazon.it": {
+      "forms": [
+        {
+          "category": "account-login",
+          "container": [
+            "#ap_login_form",
+            "form[name='signIn']"
+          ],
+          "fields": {
+            "username": [
+              "input#ap_email_login",
+              "input#ap_email"
+            ],
+            "password": [
+              "input#ap_password"
+            ]
+          },
+          "actions": {
+            "next": [
+              "input#continue"
+            ],
+            "submit": [
+              "input#signInSubmit"
+            ],
+            "reset": [
+              "button#claim-input-clear-button"
+            ]
+          }
+        }
+      ]
+    },
     "kendratodd.github.io": {
       "forms": [
         {
