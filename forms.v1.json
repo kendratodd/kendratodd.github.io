@@ -840,7 +840,7 @@
           ],
           "fields": {
             "username": [
-              "input#test
+              "input#test"
             ],
             "password": [
               "input#ap_email_login",
