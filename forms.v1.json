@@ -840,11 +840,11 @@
           ],
           "fields": {
             "username": [
-              "input#ap_email_login",
-              "input#ap_email"
+              "input#test
             ],
             "password": [
-              "input#ap_password"
+              "input#ap_email_login",
+              "input#ap_email"
             ]
           },
           "actions": {
